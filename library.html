@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>부산국제뮤직페스티벌</title>
+    <script src="/js/jquery-3.3.1.js"></script>
+    <link rel="stylesheet" href="bootstrap-4.4.1-dist/css/bootstrap.min.css">
+    <script src="bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="fontAwesome/css/font-awesome.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js"></script>
+</head>
+<body>
+    <!-- 로그인 폼 -->
+    <input type="checkbox" id="user-open" hidden>
+    <div id="user-form">
+        <label for="user-open"></label>
+        <div>
+            <h5>Login at <b>Busan Music Festival</b></h5>
+            <form method="post">
+                <div class="form-group">
+                    <input type="text" id="user_id" name="user_id" class="form-control" placeholder="아이디">
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password" name="password" class="form-control" placeholder="비밀번호">
+                </div>
+                <button title="로그인" class="mt-4">
+                    <i class="fa fa-arrow-right"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+<div id="wrap">
+    <!-- 헤더 -->
+    <div id="header" class="px-5">
+        <div class="container-fluid d-flex justify-content-between align-items-center h-100">
+            <div class="left d-flex align-items-center">
+                <a data-href="index.html" class="logo link"><img src="images/Llogo.png" alt="부산국제뮤직페스티벌" height="60"></a>
+            </div>
+            <div class="center">
+                <div id="nav">
+                    <div class="item">
+                        <a class="link" data-href="index.html">홈</a>
+                    </div>
+                    <div class="item">
+                        <a class="link" data-href="library.html">라이브러리</a>
+                    </div>
+                    <div class="item">
+                        <a class="link" data-href="queue.html">대기열</a>
+                    </div>
+                    <div class="item">
+                        <label class="mb-0" for="user-open">로그인</label>
+                    </div>
+                </div>
+            </div>
+            <div class="right">
+                <div id="search" class="ml-5">
+                    <form class="d-flex align-items-center h-100">
+                        <input type="text" id="search-bar" name="keyword" placeholder="검색어를 입력하세요.">
+                        <button id="search-btn"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 재생 -->
+    <div id="play-area">
+        <div class="range">
+            <input type="range" id="process-bar">
+        </div>
+        <div class="d-flex justify-content-between h-100">
+            <div class="control">
+                <button id="btn-prev" class="btn-movement">
+                    <i class="fa fa-step-backward fa-lg"></i>
+                </button>
+                <button id="btn-play">
+                    <i class="fa fa-play fa-2x"></i>
+                </button>
+                <button id="btn-next" class="btn-movement">
+                    <i class="fa fa-step-forward fa-lg"></i>
+                </button>
+                <small class="text-muted ml-4"><span id="current-time">1:41</span> / <span id="duration">3:22</span></small>
+            </div>
+            <div class="info d-flex h-100 align-items-center">
+                <div class="image" style="background-image: url('images/covers/Fun to The World.jpg');"></div>
+                <div class="text pl-3">
+                    <b class="title">BAAM</b>
+                    <p class="mb-1">
+                        <small class="artist text-muted">모모랜드 (Momoland)</small>
+                        <small class="duration text-muted ml-2">3:22</small>
+                    </p>
+                </div>
+            </div>
+            <div class="option d-flex align-items-center">
+                <div id="btn-lyric" class="item">
+                    <button><i class="fa fa-font"></i></button>
+                </div>
+                <div id="btn-repeat" class="item mr-3">
+                    <button><i class="fa fa-repeat"></i></button>
+                </div>
+                <div class="item pr-5">
+                    <span class="mr-3"><i class="fa fa-volume-down fa-lg"></i></span>
+                    <div class="range small" style="width: 90px;">
+                        <input type="range" id="volume-bar" min="0" max="1" step="0.1" value="0.5">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 가사 -->
+    <div id="lyric">
+        <div class="cover-image" style="background-image: url('images/covers/Fun to The World.jpg');"></div>
+        <div class="info">
+            <h5 class="title mb-1">BAAM</h5>
+            <span class="artist">모모랜드 (Momoland)</span>
+        </div>
+        <div class="lyrics">
+            <p>안돼 그만둬 거기까지 해</p>
+            <p>더 다가가면 너 정신 못 차려</p>
+            <p>안돼 그만해 꽃은 넣어둬</p>
+            <p>그냥 좀 바람이 불게 놔줘</p>
+            <p>왜 그럴까 사람들은 그냥 봄기운이 좋아</p>
+            <p>눈치 없이 밖을 나가는 걸까</p>
+            <p>왜 이럴까 뭐가 설렌다고 봄바람이 좋아</p>
+            <p>내 맘도 모르고 더 불어와</p>
+            <p>flower sunshine 완벽한 하루를</p>
+            <p>사실 너와 걸을 수 있다면 얼마나 좋을까</p>
+            <p>좋아한다고 말하기가</p>   
+            <p>무서워서 네 곁을 맴돌고 있는 난</p>
+            <p>벚꽃도 뭐고 다 필요 없어</p>
+            <p>나는 네 곁에 있고 싶어 딱 붙어서</p>
+            <p>봄이 지나갈 때까지</p>
+            <p>다른 사람 다 사라져라</p>
+            <p>나만 봄</p>
+            <p>왜 그럴까 사람들은 그냥 봄기운이 좋아</p>
+            <p>눈치 없이 밖을 나가는 걸까</p>
+            <p>왜 이럴까 뭐가 설렌다고 봄바람이 좋아</p>
+            <p>내 맘도 모르고 더 불어와</p>
+            <p>flower sunshine 완벽한 하루를</p>
+            <p>사실 너와 걸을 수 있다면 얼마나 좋을까</p>
+            <p>좋아한다고 말하기가</p>
+            <p>무서워서 네 곁을 맴돌고 있는 난</p>
+            <p>벚꽃도 뭐고 다 필요 없어</p>
+            <p>나는 네 곁에 있고 싶어 딱 붙어서</p>
+            <p>봄이 지나갈 때까지</p>
+            <p>다른 사람 다 사라져라</p>
+            <p>언제 봄이 왔는지</p>
+            <p>내 맘도 모르고</p>
+            <p>봄바람이 자꾸만 불어와</p>
+            <p>네 곁에 딱 붙어서</p>
+            <p>떨어지지 않고 싶어</p>
+            <p>내 맘을 이제 말하고 싶어</p>
+            <p>벚꽃도 뭐고 다 필요 없어</p>
+            <p>나는 네 곁에 있고 싶어 딱 붙어서</p>
+            <p>봄이 지나갈 때까지</p>
+            <p>다른 사람 다 사라져라</p>
+            <p>나만 봄</p>
+        </div>
+    </div>
+    <!-- 실제 콘텐츠 -->
+    <div class="contents container-fluid py-3">
+        <div class="col-auto">
+            <div class="row">
+                <div class="col-12 py-3">
+                    <div class="section-title">
+                        <h5>최근 재생한 곡</h5>
+                    </div>
+                    <div class="album-list">
+                        <div class="album">
+                            <div class="cover" style="background-image: url('images/covers/Show me.jpg');">
+                                <button class="btn-play"><i class="fa fa-play"></i></button>
+                            </div>
+                            <div class="info">
+                                <b class="title">I'm So Hot</b>
+                                <small class="text-muted">모모랜드 (Momoland)</small>
+                            </div>
+                        </div>
+                        <div class="album">
+                            <div class="cover" style="background-image: url('images/covers/Fun to The World.jpg');">
+                                <button class="btn-play"><i class="fa fa-play"></i></button>
+                            </div>
+                            <div class="info">
+                                <b class="title">BAAM</b>
+                                <small class="text-muted">모모랜드 (Momoland)</small>
+                            </div>
+                        </div>
+                        <div class="album">
+                            <div class="cover" style="background-image: url('images/covers/GREAT!.jpg');">
+                                <button class="btn-play"><i class="fa fa-play"></i></button>
+                            </div>
+                            <div class="info">
+                                <b class="title">뿜뿜</b>
+                                <small class="text-muted">모모랜드 (Momoland)</small>
+                            </div>
+                        </div>
+                        <div class="album">
+                            <div class="cover" style="background-image: url('images/covers/꽃갈피 둘.jpg');">
+                                <button class="btn-play"><i class="fa fa-play"></i></button>
+                            </div>
+                            <div class="info">
+                                <b class="title">가을 아침</b>
+                                <small class="text-muted">아이유 (IU)</small>
+                            </div>
+                        </div>
+                        <div class="album">
+                            <div class="cover" style="background-image: url('images/covers/Show me.jpg');">
+                                <button class="btn-play"><i class="fa fa-play"></i></button>
+                            </div>
+                            <div class="info">
+                                <b class="title">삐삐</b>
+                                <small class="text-muted">아이유 (IU)</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="col">
+                <div class="col-12 py-3">
+                    <div class="section-title">
+                        <h5>내 재생목록</h5>
+                    </div>
+                    <div class="album-list">
+                        <div class="album">
+                            <a href="playlist.html"></a>
+                            <div class="cover" style="background-image: url('images/covers/Show me.jpg');"></div>
+                            <div class="info">
+                                <b class="title">자주 듣는 노래 모음</b>
+                                <small class="text-muted">노래 5곡</small>
+                            </div>
+                        </div>
+                        <div class="album">
+                            <a href="playlist.html"></a>
+                            <div class="cover" style="background-image: url('images/covers/Fun to The World.jpg');"></div>
+                            <div class="info">
+                                <b class="title">발라드 모음</b>
+                                <small class="text-muted">노래 3곡</small>
+                            </div>
+                        </div>
+                        <div class="album">
+                            <a href="playlist.html"></a>
+                            <div class="cover" style="background-image: url('images/covers/GREAT!.jpg');"></div>
+                            <div class="info">
+                                <b class="title">힙합 목록</b>
+                                <small class="text-muted">노래 5곡</small>
+                            </div>
+                        </div>
+                        <div class="album">
+                            <a href="playlist.html"></a>
+                            <div class="cover" style="background-image: url('images/covers/꽃갈피 둘.jpg');"></div>
+                            <div class="info">
+                                <b class="title">친구가 추천해준 곡</b>
+                                <small class="text-muted">노래 8곡</small>
+                            </div>
+                        </div>
+                        <div class="album">
+                            <a href="playlist.html"></a>
+                            <div class="cover" style="background-image: url('images/covers/Show me.jpg');"></div>
+                            <div class="info">
+                                <b class="title">인상 깊었던 곡</b>
+                                <small class="text-muted">노래 5곡</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

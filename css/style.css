@@ -1,0 +1,483 @@
+@charset "UTF-8";
+/*
+green: 00E9D2
+blue: 0F82F2
+dark-blue: 2f50a3
+*/
+
+* { 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", "나눔스퀘어", "나눔고딕", sans-serif;
+}
+
+.hidden { display: none; }
+i { pointer-events: none; }
+ol, ul { list-style: none; }
+a, label, button { cursor: pointer; }
+a, a:hover { color: inherit; text-decoration: none; }
+.filter-white { filter: brightness(500%) grayscale(100%); }
+body { background-color: #fafafa; }
+#wrap {
+    padding: 80px 0 100px 400px; min-height: 100vh;
+}
+.text-blue{ color: #0F82F2; }
+.btn-primary, .bg-blue{ background-color: #0F82F2; }
+.btn { height: 40px; }
+
+.section-title {
+    position: relative;
+    margin-bottom: 10px;
+    margin-top: 30px;
+}
+.section-title * { font-weight: 600; }
+.section-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 30px;
+    height: 2px;
+    background-color: #505050;
+    display: none;
+}
+
+/* range
+*/
+
+.range {
+    height: 5px;
+    position: relative;
+}
+.range input {
+    width: 100%;
+    height: 8px;
+    background-color: #eee;
+    position: absolute;
+    left: 0; top: 0;
+    -webkit-appearance: none;
+    outline: none;
+    overflow: hidden;
+}
+.range input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 8px;
+    height: 8px;
+    background-color: #707070;
+    transition: transform 0.2s;
+    box-shadow: -100vw 0 0 100vw #0F82F2;
+    z-index: 1;
+}
+.range.small { height: 3px; }
+.range.small input { height: 5px; }
+.range.small input::-webkit-slider-thumb { width: 5px; height: 5px; }
+
+/* Play-area
+*/
+
+#play-area {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    background-color: #fff;
+    z-index: 100;
+    box-shadow: 0 -2px 3px 1px #00000020;
+}
+
+#play-area .control {
+    display: flex;   
+    align-items: center; 
+    padding: 0 30px;
+}
+
+#play-area .btn-movement {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+}
+
+#play-area #btn-play {
+    width: 60px;
+    height: 60px;
+}
+
+
+#play-area .info { width: 400px; }
+#play-area .info .image {
+    width: 60px;
+    height: 60px;
+    background-size: cover;
+    background-position: center center;
+}
+
+#play-area .info .text {
+    width: 340px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#play-area .option .item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 50px;
+    height: 50px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+#play-area span,
+#play-area button {
+    border: none;
+    background: none;
+    color: #808080;
+    outline: none;
+}
+
+#play-area .item.active *,
+#play-area button:hover *,
+#play-area .item:hover * {
+    color: #0F82F2;
+
+}
+
+#play-area #btn-repeat::after {
+    content: '반복 없음';
+    font-size: 0.8em;
+    margin-left: 0.8em;
+}
+
+#play-area #btn-repeat.none::after { content: '반복 없음'; }
+#play-area #btn-repeat.queue::after { content: '전체 반복'; }
+#play-area #btn-repeat.current::after { content: '한곡 반복'; }
+
+
+/* Header
+*/
+
+#header {
+    position: fixed;
+    left:0; 
+    top: 0;
+    width: 100%;
+    height: 80px;
+    background-color: #fff;
+    box-shadow: 0 1px 3px 1px #00000020;
+    z-index: 100;
+}
+
+#search {
+    border: 1px solid #ddd;
+    height: 40px;
+    padding: 10px 0 10px 10px;
+    position: relative;
+    border-radius: 20px;
+    opacity: 0.8;
+}
+
+#search-btn {
+    background: linear-gradient(-135deg, #00e9d2 0%, #1558ff 100%);
+    border: none;
+    width: 40px;
+    height: 40px;
+    outline: none;
+    line-height: 40px;
+    border-radius: 50%;
+    color: #fff;
+}
+
+#search-bar {
+    border: none;
+    outline: none;
+    color: #202020;
+    padding-right: 10px;
+    background: none;
+    font-size: 0.8em;
+    line-height: 40px;
+    height: 40px;
+    width: 200px;
+}
+
+
+
+/* Nav
+*/
+
+#nav { display: flex; }
+#nav .item {
+    width: 120px;
+    height: 80px;
+    text-align: center;
+    color: #505050;
+    line-height: 80px;
+}
+
+#nav .item:hover, #nav .item.active {
+    border-bottom: 3px solid #1982d8;
+    color: #2f50a3;
+}
+
+#user-open:checked ~ #user-form { opacity: 1; pointer-events: all; transition: 0.5s; }
+#user-open:checked ~ #wrap { filter: blur(5px); }
+
+#user-form {
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s;
+
+    position: fixed;
+    left: 0; top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000a;
+    z-index: 101;
+}
+
+#user-form > label {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+#user-form > div {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    min-height: 600px;
+    padding: 20px;
+    z-index: 1;
+}
+
+#user-form form { text-align: center; }
+
+#user-form h5 {
+    font-size: 1.7em;
+    font-family: "Segoe UI", sans-serif;
+    color: #fffc;
+    text-align: center;
+    margin-bottom: 50px;
+    font-weight: 100;
+}
+
+#user-form input {
+    background-color: #000a;
+    color: #fff;
+    height: 50px;
+    border-radius: 25px;
+    border: 1px solid #50505055;
+}
+#user-form input::placeholder { color: #fffa; }
+
+#user-form button {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: none;
+    color: #fff;
+    text-align: center;
+    background-color: #0F82F2aa;
+    background-clip: content-box;
+    padding: 5px;
+    border: 3px solid #0F82F2aa;
+}
+
+/* lyric
+*/
+
+#lyric {
+    position: fixed;
+    left: 0;
+    top: 80px;
+    width: 400px;
+    height: calc(100% - 180px);
+    background-color: #fff;
+    padding: 25px;
+    border-right: 1px solid #eee;
+}
+
+#lyric .cover-image {
+    position: sticky;
+    top: 30px;
+    left: 75px;
+    width: 250px;
+    height: 250px;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+#lyric .info { text-align: center; }
+#lyric .title { color: #505050; margin: 30px 0 20px; }
+#lyric .artist { color: #909090; }
+
+#lyric .lyrics {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fffd;
+    color: #000;
+    text-align: center;
+    padding-top: 50px;
+    overflow: auto;
+}
+#lyric .lyrics::-webkit-scrollbar { display: none; }
+#lyric .lyrics p.active {
+    font-size: 1.1em;
+    color: #0F82F2;
+    font-weight: bold;
+}
+
+
+/* albumlist
+*/
+
+.album-list {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    height: 350px;
+    margin-top: 30px;
+    overflow: hidden;
+}
+.album-list.wrap {
+    height: auto;
+    flex-wrap: wrap;
+}
+
+.album-list .album {
+    position: relative;
+    width: 250px;
+    min-height: 350px;
+    margin: 30px 0;
+    margin-right: 25px;
+    padding: 10px;
+}
+
+.album-list .album:hover {
+    transform: scale(1.05);
+    transition: 0.3s;
+}
+.album-list .album:hover .cover {
+    background-color: #00000055;
+    background-blend-mode: darken;
+}
+
+.album-list .cover {
+    width: 230px;
+    height: 230px;
+    background-size: cover;
+    background-position: center center;
+    box-shadow: 0 1px 3px 1px #00000020;
+    position: relative;
+}
+
+.album-list .album button {
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.2s;
+}
+
+
+.album-list .album:hover button {
+    opacity: 1;
+    pointer-events: all;
+    transition: 0.4s;
+}
+
+.album-list .btn-play {
+
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    border: none;
+    text-align: center;
+    background-color: #0F82F2dd;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: #fff;
+    outline: none;
+}
+
+.album-list .info {
+    margin-top: 20px;
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+    color: #404040;
+}
+
+.album-list .title, .album-list .artist {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.album-list .album a {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 1;
+}
+
+
+/* 콘텍스트 메뉴
+*/
+.context-menu {
+    position: absolute;
+    min-width: 200px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 1px 3px 1px #00000020;
+}
+
+.context-menu .item {
+    padding: 10px 20px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+.context-menu .item:last-child { border-bottom: none; }
+.context-menu .item:hover { background-color: #f0f0f0; }
+
+/* 로딩창
+*/
+#loading {
+    position: fixed;
+    lefT: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: #000a;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 101;
+}
+
+#loading .circle {
+    width: 100px;
+    height: 100px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #fff #fff transparent #fff;
+    border-radius: 50%;
+    animation: rotate 3s infinite linear;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0);  }
+    from { transform: rotate(360deg);  }
+}
