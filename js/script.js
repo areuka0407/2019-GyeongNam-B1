@@ -165,7 +165,7 @@ const actions = {
 
             let elem = document.createElement("div");
             elem.classList.add("album", "link", "has-context");
-            elem.dataset.lcontext = "setPlaylist openPlaylist nextPlay addQueue removePlaylist";
+            elem.dataset.context = elem.dataset.lcontext = "setPlaylist openPlaylist nextPlay addQueue removePlaylist";
             elem.dataset.ldx = playList.idx;
             elem.dataset.href = "playlist.html?playlist="+playList.idx;
             elem.innerHTML = `<div class="cover" ${firstItem ? "style=\"background-image: url('/images/covers/"+ firstItem.albumImage +"')\"": ""}></div>
@@ -237,6 +237,7 @@ const actions = {
             let elem = document.createElement("div") ;
             elem.classList.add("album", "has-context");
             elem.dataset.context = "openPlaylist nextPlay addQueue removePlayItem";
+            elem.dataset.lcontext = "removePlayItem";
             elem.dataset.idx = itemIdx;
             elem.dataset.ldx = playList.idx;
             elem.innerHTML = `<div class="cover" style="background-image: url('images/covers/${item.albumImage}');">
@@ -367,7 +368,8 @@ class App {
         let data = this.musicList.find(x => x.idx == item.dataset.idx);
         let listIdx = e.currentTarget.dataset.lcontext ? item.dataset.ldx : null; 
         
-        let menuList = (e.currentTarget.dataset.context || e.currentTarget.dataset.lcontext || "").split(" ");
+        let menuList = e.currentTarget.dataset.context.split(" ");
+        let lmenuList = e.currentTarget.dataset.lcontext ? e.currentTarget.dataset.lcontext.split(" ") : [];
         let elem = document.createElement("div");
         elem.classList.add("context-menu");
         elem.style.left = e.pageX + "px";
@@ -376,7 +378,7 @@ class App {
         menuList.forEach(menu => {
             let menuElem = document.createElement("div");
             menuElem.classList.add("item");
-            menuElem.addEventListener("mousedown", event => player[menu]({event, data, listIdx}));
+            menuElem.addEventListener("mousedown", event => lmenuList.includes(menu) ? player[menu]({event, data, listIdx}) : player[menu]({event, data}));
             menuElem.innerText = menuNames[menu];
             elem.append(menuElem);
         });
