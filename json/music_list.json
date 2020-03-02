@@ -150,7 +150,7 @@
     "albumImage": "Circular.jpg",
     "artist": "엠씨더맥스",
     "url": "[MV] M.C the MAX(엠씨더맥스) _ After You’ve Gone(넘쳐흘러).mp3",
-    "lyrics": "[MV] M.C the MAX(엠씨더맥스) _ After You’ve Gone(넘쳐흘러).txt",
+    "lyrics": null,
     "genre": "발라드"
   },
   {
@@ -161,7 +161,7 @@
     "albumImage": "Circular.jpg",
     "artist": "엠씨더맥스",
     "url": "엠씨더맥스(M.C The Max) - 사계(하루살이) 320K 가사포함.mp3",
-    "lyrics": null,
+    "lyrics": "엠씨더맥스(M.C The Max) - 사계(하루살이) 320K 가사포함.mp3",
     "genre": "발라드"
   },
   {
