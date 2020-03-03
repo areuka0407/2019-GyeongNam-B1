@@ -143,7 +143,7 @@ const actions = {
         if(player.history.length === 0) $history.innerHTML = "<div>아직 재생된 곡이 없습니다.</div>";
         player.history.forEach(h => {
             let elem = document.createElement("div");
-            elem.innerHTML = `<div class="album has-context" data-context="removeHistory openPlaylist playNext addQueue">
+            elem.innerHTML = `<div class="album has-context" data-context="removeHistory openPlaylist nextPlay addQueue" data-idx="${h.idx}">
                                 <div class="cover" style="background-image: url('images/covers/${h.albumImage}');">
                                     <button class="btn-play"><i class="fa fa-play"></i></button>
                                 </div>
@@ -322,6 +322,16 @@ class App {
                                             });
             item.dataset.event = true;
         });
+
+        // 각 아이템 별 재생버튼에 이벤트 부여
+        if(this.current_page !== "queue")
+            document.querySelectorAll(".btn-play").forEach(btn => {
+                btn.addEventListener("click", e => {
+                    let m_idx = e.currentTarget.dataset.idx;
+                    let item = this.musicList.find(({idx}) => idx == m_idx);
+                    player.playNow(item);
+                });
+            });
     }
 
     route(pathName){
@@ -355,7 +365,8 @@ class App {
             "removePlayItem": "플레이리스트에서 삭제",
             "removePlaylist": "플레이리스트 삭제",
             "addQueue": "대기열에 추가",
-            "removeQueue" : "대기열에서 삭제"
+            "removeQueue" : "대기열에서 삭제",
+            "removeHistory": "재생 기록 삭제"
         };
 
         // 일반 콘텍스트 삭제
@@ -430,7 +441,7 @@ class Player {
         this.canPlay = false;
         this.lyric = false;
         this.l_data = [];
-        this.repeat = "queue";
+        this.repeat = "none";
 
         this.$info = document.querySelector("#play-area .info")
         this.$lyrics = document.querySelector("#lyric");
@@ -475,10 +486,8 @@ class Player {
                     this.$playBtn.click();
                     break;
                 case "queue":
-                    this.next();
-                    break;
                 case "none":
-                    break;
+                        this.next();
             }
         });
 
@@ -639,7 +648,7 @@ class Player {
 
     openPlaylist({event, data, listIdx}){
         let list = listIdx ? this.playList.find(({idx}) => idx == listIdx).list : [];
-        console.log(list);
+        
         const createItem = (idx, name, checked = false) => {
             let item = document.createElement("div");
             item.classList.add("item");
@@ -732,8 +741,14 @@ class Player {
     }
 
     next = () => {
-        this.playIndex = this.playIndex + 1 >= this.queue.length ? 0 : this.playIndex + 1;
-        this.$audio.src = "/music/" + this.queue[this.playIndex].url;
+        if(this.repeat === "queue"){
+            this.playIndex = this.playIndex + 1 >= this.queue.length ? 0 : this.playIndex + 1;
+            this.$audio.src = "/music/" + this.queue[this.playIndex].url;
+            this.$audio.currentTime = 0;
+        }
+        else if(this.repeat === "none" && this.playIndex + 1 < this.queue.length){
+            this.$audio.src = "/music/" + this.queue[++this.playIndex].url;
+        }
     }
 
     prev = () => {
@@ -751,7 +766,6 @@ class Player {
         // 음악인 경우
         else this.queue.splice(this.playIndex + 1, 0, data);
 
-        console.log(this.queue);
         if(this.playIndex < 0){
             this.playIndex = 0;
             this.$audio.src = "/music/" + this.queue[this.playIndex].url;
